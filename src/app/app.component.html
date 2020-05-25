@@ -7,7 +7,21 @@
     </div>
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
+      <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name"
+        [ngClass]="{'is-invalid':nameValidationMessage}">
+      <span class="invalid-feedback">
+        {{nameValidationMessage}}
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="rating">Rating</label>
+      <input type="text" class="form-control" id="rating" placeholder="range" formControlName="rating"
+        [ngClass]="{'is-invalid':(customerForm.get('rating').touched || customerForm.get('rating').dirty) && !customerForm.get('rating').valid }">
+      <span class="invalid-feedback">
+        <span *ngIf="customerForm.get('rating').errors?.range">
+          enter between 1 to 5
+        </span>
+      </span>
     </div>
     <button type="submit" class="btn btn-primary" [disabled]="!customerForm.valid">Submit</button>
   </form>
